@@ -15,12 +15,95 @@ namespace OverParse
         public float PercentDPS, PercentReadDPS;
         
         public List<Attack> Attacks;
-        public static string[] FinishAttackIDs = new string[] { "2268332858", "170999070", "2268332813", "1266101764", "11556353", "1233721870", "1233722348", "3480338695" };
-        public static string[] PhotonAttackIDs = new string[] { "2414748436", "1954812953", "2822784832", "3339644659", "2676260123", "224805109" };
-        public static string[] LaconiumAttackIDs = { "1913897098", "2235773608", "2235773610", "2235773611", "2235773818", "2235773926", "2235773927", "2235773944", "2618804663", "2619614461", "3607718359" };
-        public static string[] AISAttackIDs = new string[] { "119505187", "79965782", "79965783", "79965784", "80047171", "434705298", "79964675", "1460054769", "4081218683", "3298256598", "2826401717" };
-        public static string[] DBAttackIDs = new string[] { "267911699", "262346668", "265285249", "264996390", "311089933", "3988916155", "265781051", "3141577094", "2289473436", "517914866", "517914869", "1117313539", "1611279117", "3283361988", "1117313602", "395090797", "2429416220", "1697271546", "1117313924" };
-        public static string[] RideAttackIDs = new string[] { "3491866260", "2056025809", "2534881408", "2600476838", "1247666429", "3750571080", "3642240295", "651750924", "2452463220", "1732461796", "3809261131", "1876785244", "3765765641", "3642969286", "1258041436" };
+        
+        public static string[] FinishAttackIDs = new string[] {   "2268332858"  , // Hero Time Sword slashes
+                                                                  "170999070"   , // Hero Time Sword finish
+                                                                  "2268332813"  , // Hero Time Sword finish hard hit
+                                                                  "1266101764"  , // Hero Time Talis pull-in
+                                                                  "11556353"    , // Hero Time Talis slashes
+                                                                  "1233721870"  , // Hero Time Talis slashes while switched to Sword
+                                                                  "1233722348"  , // Hero Time Talis slashes while switched to TMG
+                                                                  "3480338695" }; // Hero Time TMG burst
+
+        public static string[] PhotonAttackIDs = new string[] {   "2414748436"  , // Facility Cannon
+                                                                  "1954812953"  , // Photon Cannon (Uncharged)
+                                                                  "2822784832"  , // Photon Cannon (Charged)
+                                                                  "3339644659"  , // Photon Particle Turret
+                                                                  "2676260123"  , // Photon Laser Cannon
+                                                                  "224805109"  }; // Photon Punisher
+
+        public static string[] AISAttackIDs = new string[] {      "119505187"   , // A.I.S rifle (Solid Vulcan)
+                                                                  "79965782"    , // A.I.S melee first attack (Photon Saber)
+                                                                  "79965783"    , // A.I.S melee second attack (Photon Saber)
+                                                                  "79965784"    , // A.I.S melee third attack (Photon Saber)
+                                                                  "80047171"    , // A.I.S dash melee (Photon Saber)
+                                                                  "434705298"   , // A.I.S rockets (Photon Grenade)
+                                                                  "79964675"    , // A.I.S gap closer PA attack (Photon Rush)
+                                                                  "1460054769"  , // A.I.S cannon (Photon Blaster)
+                                                                  "4081218683"  , // A.I.S mob freezing attack (Photon Blizzard)
+                                                                  "3298256598"  , // A.I.S Weak Bullet
+                                                                  "2826401717" }; // A.I.S Area Heal
+
+        public static string[] RideAttackIDs = new string[] {     "3491866260"  , // Rideroid throw
+                                                                  "2056025809"  , // Rideroid hit forward slow
+                                                                  "2534881408"  , // Rideroid hit forward stop
+                                                                  "2600476838"  , // Rideroid hit dodge
+                                                                  "1247666429"  , // Rideroid hit forward fast
+                                                                  "3750571080"  , // Big UFO outer control unit hit?
+                                                                  "3642240295"  , // Big UFO Core hit?
+                                                                  "651750924"   , // Big UFO hit?
+                                                                  "2452463220"  , // Something relating to big ufo and rideroid
+                                                                  "1732461796"  , // Something relating to big ufo and rideroid
+                                                                  "3809261131"  , // Something relating to big ufo and rideroid
+                                                                  "1876785244"  , // Rideroid auto-attack (Mother phase 1)
+                                                                  "3765765641"  , // Rideroid rockets (Mother phase 1)
+                                                                  "3642969286"  , // Rideroid barrel roll (Mother phase 1)
+                                                                  "1258041436" }; // Rideroid Mother's wall spun back (Mother phase 1)
+
+        public static string[] DBAttackIDs = new string[] {       "267911699"   , // Dark Blast (Elder) first hit
+                                                                  "262346668"   , // Dark Blast (Elder) second
+                                                                  "265285249"   , // Dark Blast (Elder) third
+                                                                  "264996390"   , // Dark Blast (Elder) fourth (kick)
+                                                                  "311089933"   , // Dark Blast (Elder) fifth (launcher)
+                                                                  "3988916155"  , // Dark Blast (Elder) sixth (pummel)
+                                                                  "265781051"   , // Dark Blast (Elder) seventh (pummel pt2)
+                                                                  "3141577094"  , // Dark Blast (Elder) Step Attack
+                                                                  "2289473436"  , // Dark Blast (Elder) Violence Step
+                                                                  "517914866"   , // Physical Dash melee
+                                                                  "517914869"   , // Physical Dash melee wide range
+                                                                  "1117313539"  , // Punishment Knuckle (uncharged)
+                                                                  "1611279117"  , // Punishment Knuckle (charged)
+                                                                  "3283361988"  , // Ultimate Impact
+                                                                  "1117313602"  , // Infinity Rush hits (uncharged)
+                                                                  "395090797"   , // Infinity Rush finish (uncharged)
+                                                                  "2429416220"  , // Infinity Rush hits charged
+                                                                  "1697271546"  , // Infinity Rush finish charged
+                                                                  "1117313924"  , // Tyrant Strike
+                                                                  "2743071591"  , // Dark Blast (Loser) hit
+                                                                  "1783571383"  , // Ortho Sabarta (1-4?)
+                                                                  "2928504078"  , // Ortho Sabarta (1-4?)
+                                                                  "1783571188"  , // Convergent Ray uncharged
+                                                                  "2849190450"  , // Convergent Ray charged
+                                                                  "1223455602"  , // Gamma Burst
+                                                                  "651603449"   , // Wisdom Force
+                                                                  "2970658149"  , // Dive Assault
+                                                                  "2191939386"  , // Counter Step
+                                                                  "2091027507"  , // Special,Diffusion Ray
+                                                                  "4078260742"  , // Sharp Glide
+                                                                  "2743062721" }; // Attack Advance (Loser)
+
+
+        public static string[] LaconiumAttackIDs = new string[] { "1913897098"  , // Rapid-Fire Mana Gun
+                                                                  "2235773608"  , // Laconium Sword air second normal attack 
+                                                                  "2235773610"  , // Laconium Sword air first normal attack 
+                                                                  "2235773611"  , // Laconium Sword air third normal attack
+                                                                  "2235773818"  , // Buster Divide (Laconium Sword uncharged)
+                                                                  "2235773926"  , // Laconium Sword second normal attack
+                                                                  "2235773927"  , // Laconium Sword first normal attack
+                                                                  "2235773944"  , // Laconium Sword third normal attack
+                                                                  "2618804663"  , // Buster Divide (Laconium Sword charged)
+                                                                  "2619614461"  , // Laconium Sword Step Attack
+                                                                  "3607718359" }; // Laconium Sword slash
 
         public static float maxShare = 0;
         public static string Log;

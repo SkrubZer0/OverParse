@@ -117,6 +117,7 @@
     <Compile Include="inputbox.xaml.cs">
       <DependentUpon>inputbox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="WindowsServices.cs" />
     <Page Include="Details.xaml">
       <SubType>Designer</SubType>
