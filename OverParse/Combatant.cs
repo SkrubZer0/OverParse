@@ -23,14 +23,16 @@ namespace OverParse
                                                                   "11556353"    , // Hero Time Talis slashes
                                                                   "1233721870"  , // Hero Time Talis slashes while switched to Sword
                                                                   "1233722348"  , // Hero Time Talis slashes while switched to TMG
-                                                                  "3480338695" }; // Hero Time TMG burst
+                                                                  "3480338695"    // Hero Time TMG burst
+                                                                  }; 
 
         public static string[] PhotonAttackIDs = new string[] {   "2414748436"  , // Facility Cannon
                                                                   "1954812953"  , // Photon Cannon (Uncharged)
                                                                   "2822784832"  , // Photon Cannon (Charged)
                                                                   "3339644659"  , // Photon Particle Turret
                                                                   "2676260123"  , // Photon Laser Cannon
-                                                                  "224805109"  }; // Photon Punisher
+                                                                  "224805109"     // Photon Punisher
+                                                                  }; 
 
         public static string[] AISAttackIDs = new string[] {      "119505187"   , // A.I.S rifle (Solid Vulcan)
                                                                   "79965782"    , // A.I.S melee first attack (Photon Saber)
@@ -42,7 +44,9 @@ namespace OverParse
                                                                   "1460054769"  , // A.I.S cannon (Photon Blaster)
                                                                   "4081218683"  , // A.I.S mob freezing attack (Photon Blizzard)
                                                                   "3298256598"  , // A.I.S Weak Bullet
-                                                                  "2826401717" }; // A.I.S Area Heal
+                                                                  "2826401717"    // A.I.S Area Heal
+
+                                                                  }; 
 
         public static string[] RideAttackIDs = new string[] {     "3491866260"  , // Rideroid throw
                                                                   "2056025809"  , // Rideroid hit forward slow
@@ -58,7 +62,8 @@ namespace OverParse
                                                                   "1876785244"  , // Rideroid auto-attack (Mother phase 1)
                                                                   "3765765641"  , // Rideroid rockets (Mother phase 1)
                                                                   "3642969286"  , // Rideroid barrel roll (Mother phase 1)
-                                                                  "1258041436" }; // Rideroid Mother's wall spun back (Mother phase 1)
+                                                                  "1258041436"    // Rideroid Mother's wall spun back (Mother phase 1)
+                                                                  }; 
 
         public static string[] DBAttackIDs = new string[] {       "267911699"   , // Dark Blast (Elder) first hit
                                                                   "262346668"   , // Dark Blast (Elder) second
@@ -113,7 +118,22 @@ namespace OverParse
                                                                   "37504833"    , // Fortissimo Kick (Royal Scorpion)
                                                                   "1891210633"  , // Black Queen Arrival
                                                                   "3617357696"  , // Sensational Speed Attack
-                                                                  "452272060"   };// Ravishing Step
+                                                                  "452272060"   , // Ravishing Step
+                                                                  "2002943320"  , // Dark Blast (Double) first hit
+                                                                  "2000047869"  , // Dark Blast (Double) second hit
+                                                                  "2002496834"  , // Dark Blast (Double) third hit
+                                                                  "1957174279"  , // Dark Blast (Double) fourth hit
+                                                                  "1955884339"  , // Dark Blast (Double) fifth hit
+                                                                  "4271466373"  , // Surprise Hammer
+                                                                  "305729398"   , // Surprise Hammer second hit
+                                                                  "682884756"   , // Waku Waku Go-Kart physical hit
+                                                                  "4271465479"  , // Waku Waku Go-Kart physical hit "2-wheelie mode"
+                                                                  "3983075073"  , // Waku Waku Go-Kart projectile
+                                                                  "4271465542"  , // Happy Bazooka
+                                                                  "3593316716"  , // Flower Carnival attacks
+                                                                  "483639921"   , // Flower Carnival finish
+                                                                  "472092093"     // Clutch Step             
+                                                                  };
 
         public static string[] LaconiumAttackIDs = new string[] { "1913897098"  , // Rapid-Fire Mana Gun
                                                                   "2235773608"  , // Laconium Sword air second normal attack 
@@ -125,7 +145,8 @@ namespace OverParse
                                                                   "2235773944"  , // Laconium Sword third normal attack
                                                                   "2618804663"  , // Buster Divide (Laconium Sword charged)
                                                                   "2619614461"  , // Laconium Sword Step Attack
-                                                                  "3607718359" }; // Laconium Sword slash
+                                                                  "3607718359"    // Laconium Sword slash
+                                                                  }; 
 
         public static float maxShare = 0;
         public static string Log;
