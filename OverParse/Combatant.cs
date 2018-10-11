@@ -165,8 +165,8 @@ namespace OverParse
         public int GetZanverseDamage => Attacks.Where(a => a.ID == "2106601422").Sum(x => x.Damage);
         public int GetFinishDamage => Attacks.Where(a => FinishAttackIDs.Contains(a.ID)).Sum(x => x.Damage);
 
-        public string WJAPercent => ((Attacks.Where(a => !MainWindow.ignoreskill.Contains(a.ID)).Average(x => x.JA)) * 100).ToString("00.00");
-        public string WCRIPercent => ((Attacks.Average(a => a.Cri)) * 100).ToString("00.00");
+        public string WJAPercent => GetWJAPercent();
+        public string WCRIPercent => GetWCRIPercent();
 
         public bool IsYou => (ID == Hacks.currentPlayerID);
         public bool IsAlly => (int.Parse(ID) >= 10000000) && !IsZanverse && !IsFinish;
@@ -226,14 +226,49 @@ namespace OverParse
             get {
                 try
                 {
-                    if (Properties.Settings.Default.Nodecimal)
+                    IEnumerable<Attack> JAs = Attacks.Where(a => !MainWindow.ignoreskill.Contains(a.ID));
+
+                    if (JAs.Any())
                     {
-                        return ((Attacks.Where(a => !MainWindow.ignoreskill.Contains(a.ID)).Average(x => x.JA)) * 100).ToString("N0");
-                    } else {
-                        return ((Attacks.Where(a => !MainWindow.ignoreskill.Contains(a.ID)).Average(x => x.JA)) * 100).ToString("N2");
+                        Double JAAverage = JAs.Average(x => x.JA) * 100;
+
+                        if (Properties.Settings.Default.Nodecimal)
+                        {
+                            return JAAverage.ToString("N0");
+                        }
+                        else
+                        {
+                            return JAAverage.ToString("N2");
+                        }
+                    }
+                    else
+                    {
+                        if (Properties.Settings.Default.Nodecimal)
+                        {
+                            return "0";
+                        }
+                        else
+                        {
+                            return "0.00";
+                        }
                     }
                 }
                 catch { return "Error"; }
+            }
+        }
+
+        private string GetWJAPercent()
+        {
+            IEnumerable<Attack> JAs = Attacks.Where(a => !MainWindow.ignoreskill.Contains(a.ID));
+
+            if (JAs.Any())
+            {
+                Double JAAverage = JAs.Average(x => x.JA) * 100;
+                return JAAverage.ToString("00.00");
+            }
+            else
+            {
+                return "0.00";
             }
         }
 
@@ -251,6 +286,11 @@ namespace OverParse
                 }
                 catch { return "Error"; }
             }
+        }
+
+        private string GetWCRIPercent()
+        {
+            return ((Attacks.Average(a => a.Cri)) * 100).ToString("00.00");
         }
 
         public Combatant(string id, string name)
