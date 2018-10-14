@@ -376,7 +376,8 @@ namespace OverParse
             {
                 Combatant temp = new Combatant(c.ID, c.Name, c.isTemporary);
                 foreach (Attack a in c.Attacks)
-                    temp.Attacks.Add(new Attack(a.ID, a.Damage, a.Timestamp,a.JA,a.Cri,a.Dmgd));
+                    temp.Attacks.Add(new Attack(a.ID, a.Damage,a.JA,a.Cri));
+                temp.Damaged = c.Damaged;
                 temp.ActiveTime = c.ActiveTime;
                 workingList.Add(temp);
             }

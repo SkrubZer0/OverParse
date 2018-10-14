@@ -10,6 +10,8 @@ namespace OverParse
         private const float maxBGopacity = 0.6f;
         public string ID;
         public string Name { get; set; }
+        public static float maxShare = 0;
+        public static string Log;
         public string isTemporary;
         public int ActiveTime;
         public float PercentDPS, PercentReadDPS;
@@ -148,10 +150,7 @@ namespace OverParse
                                                                   "3607718359"    // Laconium Sword slash
                                                                   }; 
 
-        public static float maxShare = 0;
-        public static string Log;
-
-        public int Damage => Attacks.Sum(x => x.Damage);
+        public int Damage => GetDamage();
         public int ReadDamage => GetMPADamage();
         public int DBDamage => Attacks.Where(a => DBAttackIDs.Contains(a.ID)).Sum(x => x.Damage);   
         public int LswDamage => Attacks.Where(a => LaconiumAttackIDs.Contains(a.ID)).Sum(x => x.Damage);
@@ -159,12 +158,14 @@ namespace OverParse
         public int AisDamage => Attacks.Where(a => AISAttackIDs.Contains(a.ID)).Sum(x => x.Damage);
         public int RideDamage => Attacks.Where(a => RideAttackIDs.Contains(a.ID)).Sum(x => x.Damage);
 
-        public int Damaged => Attacks.Sum(x => x.Dmgd);
-        public string ReadDamaged => Attacks.Sum(x => x.Dmgd).ToString("N0");
+        public int Damaged;
+        public string ReadDamaged => Damaged.ToString("N0");
 
         public int GetZanverseDamage => Attacks.Where(a => a.ID == "2106601422").Sum(x => x.Damage);
         public int GetFinishDamage => Attacks.Where(a => FinishAttackIDs.Contains(a.ID)).Sum(x => x.Damage);
 
+        public string JAPercent => GetJAPercent();
+        public string CRIPercent => GetCRIPercent();
         public string WJAPercent => GetWJAPercent();
         public string WCRIPercent => GetWCRIPercent();
 
@@ -178,11 +179,12 @@ namespace OverParse
         public bool IsDB => (isTemporary == "DB");
         public bool IsLsw => (isTemporary == "Lsw");
 
-        public int MaxHitNum => MaxHitAttack.Damage;
+        public string MaxHit => GetMaxHit();
         public string MaxHitdmg => MaxHitAttack.Damage.ToString("N0");
         public string MaxHitID => MaxHitAttack.ID;
+        public int MaxHitNum => MaxHitAttack.Damage;
 
-        public string DPSReadout => PercentReadDPSReadout;
+        public string PercentReadDPSReadout => GetPercentReadDPSReadout();
         public string DamageReadout => ReadDamage.ToString("N0");
 
         public double DPS => GetDPS();
@@ -221,40 +223,55 @@ namespace OverParse
             }
         }
 
-        public string JAPercent
+        private int GetDamage()
         {
-            get {
-                try
+            return Attacks.Sum(x => x.Damage);
+        }
+
+        private string GetMaxHit()
+        {
+            if (MaxHitAttack == null)
+                return "--";
+            string attack = "Unknown";
+            if (MainWindow.skillDict.ContainsKey(MaxHitID))
+            {
+                attack = MainWindow.skillDict[MaxHitID];
+            }
+            return MaxHitAttack.Damage.ToString("N0") + $" ({attack})";
+        }
+
+        private string GetJAPercent()
+        {
+            try
+            {
+                IEnumerable<Attack> JAs = Attacks.Where(a => !MainWindow.ignoreskill.Contains(a.ID));
+
+                if (JAs.Any())
                 {
-                    IEnumerable<Attack> JAs = Attacks.Where(a => !MainWindow.ignoreskill.Contains(a.ID));
+                    Double JAAverage = JAs.Average(x => x.JA) * 100;
 
-                    if (JAs.Any())
+                    if (Properties.Settings.Default.Nodecimal)
                     {
-                        Double JAAverage = JAs.Average(x => x.JA) * 100;
-
-                        if (Properties.Settings.Default.Nodecimal)
-                        {
-                            return JAAverage.ToString("N0");
-                        }
-                        else
-                        {
-                            return JAAverage.ToString("N2");
-                        }
+                        return JAAverage.ToString("N0");
                     }
                     else
                     {
-                        if (Properties.Settings.Default.Nodecimal)
-                        {
-                            return "0";
-                        }
-                        else
-                        {
-                            return "0.00";
-                        }
+                        return JAAverage.ToString("N2");
                     }
                 }
-                catch { return "Error"; }
+                else
+                {
+                    if (Properties.Settings.Default.Nodecimal)
+                    {
+                        return "0";
+                    }
+                    else
+                    {
+                        return "0.00";
+                    }
+                }
             }
+            catch { return "Error"; }
         }
 
         private string GetWJAPercent()
@@ -272,47 +289,23 @@ namespace OverParse
             }
         }
 
-        public string CRIPercent
+        private string GetCRIPercent()
         {
-            get {
-                try
+            try
+            {
+                if (Properties.Settings.Default.Nodecimal)
                 {
-                    if (Properties.Settings.Default.Nodecimal)
-                    {
-                        return ((Attacks.Average(a => a.Cri)) * 100).ToString("N0");
-                    } else {
-                        return ((Attacks.Average(a => a.Cri)) * 100).ToString("N2");
-                    }
+                    return ((Attacks.Average(a => a.Cri)) * 100).ToString("N0");
+                } else {
+                    return ((Attacks.Average(a => a.Cri)) * 100).ToString("N2");
                 }
-                catch { return "Error"; }
             }
+            catch { return "Error"; }
         }
 
         private string GetWCRIPercent()
         {
             return ((Attacks.Average(a => a.Cri)) * 100).ToString("00.00");
-        }
-
-        public Combatant(string id, string name)
-        {
-            ID = id;
-            Name = name;
-            PercentDPS = -1;
-            Attacks = new List<Attack>();
-            isTemporary = "no";
-            PercentReadDPS = 0;
-            ActiveTime = 0;
-        }
-
-        public Combatant(string id, string name, string temp)
-        {
-            ID = id;
-            Name = name;
-            PercentDPS = -1;
-            Attacks = new List<Attack>();
-            isTemporary = temp;
-            PercentReadDPS = 0;
-            ActiveTime = 0;
         }
 
         private double GetDPS()
@@ -443,36 +436,42 @@ namespace OverParse
             }
         }
 
-        public string MaxHit
+        private string GetPercentReadDPSReadout()
         {
-            get
+            if (PercentReadDPS < -.5)
             {
-                if (MaxHitAttack == null)
-                    return "--";
-                string attack = "Unknown";
-                if (MainWindow.skillDict.ContainsKey(MaxHitID))
-                {
-                    attack = MainWindow.skillDict[MaxHitID];
-                }
-                return MaxHitAttack.Damage.ToString("N0") + $" ({attack})";
+                return "--";
+            }
+            else
+            {
+                return $"{PercentReadDPS:0.00}";
             }
         }
 
-        public string PercentReadDPSReadout
+        //Constructors
+        public Combatant(string id, string name)
         {
-            get
-            {
-                if (PercentReadDPS < -.5)
-                {
-                    return "--";
-                }
-                else
-                {
-                    return $"{PercentReadDPS:0.00}";
-                }
-            }
+            ID = id;
+            Name = name;
+            PercentDPS = -1;
+            Attacks = new List<Attack>();
+            isTemporary = "no";
+            PercentReadDPS = 0;
+            ActiveTime = 0;
+            Damaged = 0;
         }
 
+        public Combatant(string id, string name, string temp)
+        {
+            ID = id;
+            Name = name;
+            PercentDPS = -1;
+            Attacks = new List<Attack>();
+            isTemporary = temp;
+            PercentReadDPS = 0;
+            ActiveTime = 0;
+            Damaged = 0;
+        }
     }
 
     static class Hacks
@@ -486,19 +485,15 @@ namespace OverParse
     {
         public string ID;
         public int Damage;
-        public int Timestamp;
         public int JA;
         public int Cri;
-        public int Dmgd;
 
-        public Attack(string initID, int initDamage, int initTimestamp, int justAttack, int critical, int damaged)
+        public Attack(string initID, int initDamage, int justAttack, int critical)
         {
             ID = initID;
             Damage = initDamage;
-            Timestamp = initTimestamp;
             JA = justAttack;
             Cri = critical;
-            Dmgd = damaged;
         }
     }
 

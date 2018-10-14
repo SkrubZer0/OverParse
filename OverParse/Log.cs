@@ -435,7 +435,7 @@ namespace OverParse
                         if (sourceID == "0" || attackID == "0")
                             continue;
 
-                        //Add damage taken to a combatant if they take damage
+                        //Add different attacks if a new attack is found
                         if (10000000 < int.Parse(sourceID))
                         {
                             foreach (Combatant x in combatants)
@@ -460,10 +460,10 @@ namespace OverParse
                                 startTimestamp = newTimestamp;
                             }
 
-                            source.Attacks.Add(new Attack(attackID, hitDamage, newTimestamp - startTimestamp, justAttack, critical, 0));
+                            source.Attacks.Add(new Attack(attackID, hitDamage, justAttack, critical));
                             running = true;
                         }
-                        else
+                        else //Add Damage Taken if combatant takes damage
                         {
                             foreach (Combatant x in combatants)
                             {
@@ -488,7 +488,7 @@ namespace OverParse
                                 startTimestamp = newTimestamp;
                             }
 
-                            source.Attacks.Add(new Attack("Damage Taken", 0, newTimestamp - startTimestamp, 0, 0, hitDamage));
+                            source.Damaged += hitDamage;
                             running = true;
                         }
                     }
