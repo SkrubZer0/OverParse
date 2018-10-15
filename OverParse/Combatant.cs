@@ -293,11 +293,31 @@ namespace OverParse
         {
             try
             {
-                if (Properties.Settings.Default.Nodecimal)
+                IEnumerable<Attack> CRIs = Attacks;
+
+                if (CRIs.Any())
                 {
-                    return ((Attacks.Average(a => a.Cri)) * 100).ToString("N0");
-                } else {
-                    return ((Attacks.Average(a => a.Cri)) * 100).ToString("N2");
+                    Double CRIAverage = CRIs.Average(x => x.Cri) * 100;
+
+                    if (Properties.Settings.Default.Nodecimal)
+                    {
+                        return CRIAverage.ToString("N0");
+                    }
+                    else
+                    {
+                        return CRIAverage.ToString("N2");
+                    }
+                }
+                else
+                {
+                    if (Properties.Settings.Default.Nodecimal)
+                    {
+                        return "0";
+                    }
+                    else
+                    {
+                        return "0.00";
+                    }
                 }
             }
             catch { return "Error"; }
@@ -305,7 +325,18 @@ namespace OverParse
 
         private string GetWCRIPercent()
         {
-            return ((Attacks.Average(a => a.Cri)) * 100).ToString("00.00");
+            IEnumerable<Attack> CRIs = Attacks;
+
+            if (CRIs.Any())
+            {
+                Double CRIAverage = CRIs.Average(x => x.Cri) * 100;
+
+                return CRIAverage.ToString("00.00");
+            }
+            else
+            {
+                return "00.00";
+            }
         }
 
         private double GetDPS()
