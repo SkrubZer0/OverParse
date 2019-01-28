@@ -544,7 +544,7 @@ namespace OverParse
 
 
             // get group damage totals
-            int totalReadDamage = workingList.Where(c => c.IsAlly).Sum(x => x.Damage);
+            int totalReadDamage = workingList.Where(c => c.IsAlly || c.IsZanverse || c.IsFinish).Sum(x => x.Damage);
 
             // dps calcs!
             foreach (Combatant c in workingList)

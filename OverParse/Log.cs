@@ -244,13 +244,15 @@ namespace OverParse
             {
                 int elapsed = newTimestamp - startTimestamp;
                 TimeSpan timespan = TimeSpan.FromSeconds(elapsed);
+                int totalDamage = combatants.Where(c => c.IsAlly || c.IsZanverse || c.IsFinish).Sum(x => x.Damage);
+                double totalDPS = combatants.Where(c => c.IsAlly || c.IsZanverse || c.IsFinish).Sum(x => x.DPS);
                 string timer = timespan.ToString(@"mm\:ss");
-                string log = DateTime.Now.ToString("F") + " | " + timer + " | "  + Environment.NewLine + Environment.NewLine;
+                string log = DateTime.Now.ToString("F") + " | " + timer + " | " + "Total Damage Dealt: " + totalDamage.ToString("N0") + " | " + "Total DPS: " + totalDPS.ToString("N0") + Environment.NewLine + Environment.NewLine;
 
                 foreach (Combatant c in combatants)
                 {
                     if (c.IsAlly || c.IsZanverse || c.IsFinish)
-                        log += $"{c.Name} | {c.PercentReadDPSReadout}% | {c.ReadDamage.ToString("N0")} Damage | {c.Damaged} Damage Taken | {c.DPS} DPS | JA : {c.WJAPercent}% | Critical : {c.WCRIPercent}% | Max : {c.MaxHit}" + Environment.NewLine;
+                        log += $"{c.Name} | {c.PercentReadDPSReadout}% | {c.ReadDamage.ToString("N0")} Damage | {c.Damaged.ToString("N0")} Damage Taken | {c.DPS.ToString("N0")} DPS | JA : {c.WJAPercent}% | Critical : {c.WCRIPercent}% | Max : {c.MaxHit}" + Environment.NewLine;
                 }
 
                 log += Environment.NewLine + Environment.NewLine;
@@ -343,6 +345,11 @@ namespace OverParse
                                 log += $"{paddedPercent}%	| {i.Item1} ({sum}) Damage";
                                 log += $" - JA : {ja}% - Critical : {cri}%" + Environment.NewLine;
                                 log += $"      	|   {hits} hits - {min} min, {avg} avg, {max} max" + Environment.NewLine;
+                            }
+                            else
+                            {
+                                string hits = i.Item2.Count().ToString("N0");
+                                log += "Number of hits taken: " + hits + Environment.NewLine;
                             }
                         }
 
