@@ -13,7 +13,7 @@ namespace OverParse
         public static float maxShare = 0;
         public static string Log;
         public string isTemporary;
-        public int ActiveTime;
+        public long ActiveTime;
         public float PercentDPS, PercentReadDPS;
         
         public List<Attack> Attacks;
@@ -150,19 +150,19 @@ namespace OverParse
                                                                   "3607718359"    // Laconium Sword slash
                                                                   }; 
 
-        public int Damage => GetDamage();
-        public int ReadDamage => GetMPADamage();
-        public int DBDamage => Attacks.Where(a => DBAttackIDs.Contains(a.ID)).Sum(x => x.Damage);   
-        public int LswDamage => Attacks.Where(a => LaconiumAttackIDs.Contains(a.ID)).Sum(x => x.Damage);
-        public int PwpDamage => Attacks.Where(a => PhotonAttackIDs.Contains(a.ID)).Sum(x => x.Damage);
-        public int AisDamage => Attacks.Where(a => AISAttackIDs.Contains(a.ID)).Sum(x => x.Damage);
-        public int RideDamage => Attacks.Where(a => RideAttackIDs.Contains(a.ID)).Sum(x => x.Damage);
+        public long Damage => GetDamage();
+        public long ReadDamage => GetMPADamage();
+        public long DBDamage => Attacks.Where(a => DBAttackIDs.Contains(a.ID)).Sum(x => x.Damage);   
+        public long LswDamage => Attacks.Where(a => LaconiumAttackIDs.Contains(a.ID)).Sum(x => x.Damage);
+        public long PwpDamage => Attacks.Where(a => PhotonAttackIDs.Contains(a.ID)).Sum(x => x.Damage);
+        public long AisDamage => Attacks.Where(a => AISAttackIDs.Contains(a.ID)).Sum(x => x.Damage);
+        public long RideDamage => Attacks.Where(a => RideAttackIDs.Contains(a.ID)).Sum(x => x.Damage);
 
-        public int Damaged;
+        public long Damaged;
         public string ReadDamaged => Damaged.ToString("N0");
 
-        public int GetZanverseDamage => Attacks.Where(a => a.ID == "2106601422").Sum(x => x.Damage);
-        public int GetFinishDamage => Attacks.Where(a => FinishAttackIDs.Contains(a.ID)).Sum(x => x.Damage);
+        public long GetZanverseDamage => Attacks.Where(a => a.ID == "2106601422").Sum(x => x.Damage);
+        public long GetFinishDamage => Attacks.Where(a => FinishAttackIDs.Contains(a.ID)).Sum(x => x.Damage);
 
         public string JAPercent => GetJAPercent();
         public string CRIPercent => GetCRIPercent();
@@ -170,7 +170,7 @@ namespace OverParse
         public string WCRIPercent => GetWCRIPercent();
 
         public bool IsYou => (ID == Hacks.currentPlayerID);
-        public bool IsAlly => (int.Parse(ID) >= 10000000) && !IsZanverse && !IsFinish;
+        public bool IsAlly => (long.Parse(ID) >= 10000000) && !IsZanverse && !IsFinish;
         public bool IsAIS => (isTemporary == "AIS");
         public bool IsRide => (isTemporary == "Ride");
         public bool IsZanverse => (isTemporary == "Zanverse");
@@ -182,7 +182,7 @@ namespace OverParse
         public string MaxHit => GetMaxHit();
         public string MaxHitdmg => MaxHitAttack.Damage.ToString("N0");
         public string MaxHitID => MaxHitAttack.ID;
-        public int MaxHitNum => MaxHitAttack.Damage;
+        public long MaxHitNum => MaxHitAttack.Damage;
 
         public string PercentReadDPSReadout => GetPercentReadDPSReadout();
         public string DamageReadout => ReadDamage.ToString("N0");
@@ -223,7 +223,7 @@ namespace OverParse
             }
         }
 
-        private int GetDamage()
+        private long GetDamage()
         {
             return Attacks.Sum(x => x.Damage);
         }
@@ -363,12 +363,12 @@ namespace OverParse
             }
         }
 
-        private int GetMPADamage()
+        private long GetMPADamage()
         {
             if (IsZanverse || IsFinish || IsAIS || IsPwp || IsDB || IsRide)
                 return Damage;
 
-            int temp = Damage;
+            long temp = Damage;
             if (Properties.Settings.Default.SeparateZanverse)
                 temp -= GetZanverseDamage;
             if (Properties.Settings.Default.SeparateFinish)
@@ -386,7 +386,7 @@ namespace OverParse
 
         private String FormatNumber(double value)
         {
-            int num = (int)Math.Round(value);
+            long num = (long)Math.Round(value);
 
             if (value >= 100000000)
                 return (value / 1000000).ToString("#,0") + "M";
@@ -515,11 +515,11 @@ namespace OverParse
     public class Attack
     {
         public string ID;
-        public int Damage;
-        public int JA;
-        public int Cri;
+        public long Damage;
+        public long JA;
+        public long Cri;
 
-        public Attack(string initID, int initDamage, int justAttack, int critical)
+        public Attack(string initID, long initDamage, long justAttack, long critical)
         {
             ID = initID;
             Damage = initDamage;
