@@ -386,7 +386,7 @@ namespace OverParse
             CombatantData.Items.Clear();
 
             // for zanverse dummy and status bar because WHAT IS GOOD STRUCTURE
-            long elapsed = 0;
+            int elapsed = 0;
             Combatant stealActiveTimeDummy = workingList.FirstOrDefault();
             if (stealActiveTimeDummy != null)
                 elapsed = stealActiveTimeDummy.ActiveTime;
@@ -501,8 +501,8 @@ namespace OverParse
             workingList.Sort((x, y) => y.ReadDamage.CompareTo(x.ReadDamage));
 
             // make dummy zanverse combatant if necessary
-            long totalZanverse = workingList.Where(c => c.IsAlly == true).Sum(x => x.GetZanverseDamage);
-            long totalFinish = workingList.Where(c => c.IsAlly == true).Sum(x => x.GetFinishDamage);
+            int totalZanverse = workingList.Where(c => c.IsAlly == true).Sum(x => x.GetZanverseDamage);
+            int totalFinish = workingList.Where(c => c.IsAlly == true).Sum(x => x.GetFinishDamage);
 
             if (Properties.Settings.Default.SeparateFinish)
             {
@@ -544,7 +544,7 @@ namespace OverParse
 
 
             // get group damage totals
-            long totalReadDamage = workingList.Where(c => c.IsAlly || c.IsZanverse || c.IsFinish).Sum(x => x.Damage);
+            int totalReadDamage = workingList.Where(c => c.IsAlly || c.IsZanverse || c.IsFinish).Sum(x => x.Damage);
 
             // dps calcs!
             foreach (Combatant c in workingList)
@@ -624,7 +624,7 @@ namespace OverParse
             // autoend
             if (encounterlog.running && Properties.Settings.Default.AutoEndEncounters)
             {
-                long unixTimestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                int unixTimestamp = (int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                 if ((unixTimestamp - encounterlog.newTimestamp) >= Properties.Settings.Default.EncounterTimeout)
                 {
                     //Automatically ending an encounter

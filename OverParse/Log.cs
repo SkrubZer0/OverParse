@@ -9,10 +9,10 @@ namespace OverParse
 {
     public class Log
     {
-        private long startTimestamp = 0;
-        public long newTimestamp = 0;
+        private int startTimestamp = 0;
+        public int newTimestamp = 0;
         private string encounterData;
-        private List<long> instances = new List<long>();
+        private List<int> instances = new List<int>();
         public List<Combatant> combatants = new List<Combatant>();
         public List<Combatant> backupCombatants = new List<Combatant>();
 
@@ -242,9 +242,9 @@ namespace OverParse
 
             if (combatants.Count != 0)
             {
-                long elapsed = newTimestamp - startTimestamp;
+                int elapsed = newTimestamp - startTimestamp;
                 TimeSpan timespan = TimeSpan.FromSeconds(elapsed);
-                long totalDamage = combatants.Where(c => c.IsAlly || c.IsZanverse || c.IsFinish).Sum(x => x.Damage);
+                int totalDamage = combatants.Where(c => c.IsAlly || c.IsZanverse || c.IsFinish).Sum(x => x.Damage);
                 double totalDPS = combatants.Where(c => c.IsAlly || c.IsZanverse || c.IsFinish).Sum(x => x.DPS);
                 string timer = timespan.ToString(@"mm\:ss");
                 string log = DateTime.Now.ToString("F") + " | " + timer + " | " + "Total Damage Dealt: " + totalDamage.ToString("N0") + " | " + "Total DPS: " + totalDPS.ToString("N0") + Environment.NewLine + Environment.NewLine;
@@ -266,7 +266,7 @@ namespace OverParse
 
                         List<string> attackNames = new List<string>();
                         List<string> finishNames = new List<string>();
-                        List<Tuple<string, List<long>, List<long>, List<long>>> attackData = new List<Tuple<string, List<long>, List<long>, List<long>>>();
+                        List<Tuple<string, List<int>, List<int>, List<int>>> attackData = new List<Tuple<string, List<int>, List<int>, List<int>>>();
 
                         if (c.IsZanverse && Properties.Settings.Default.SeparateZanverse)
                         {
@@ -279,10 +279,10 @@ namespace OverParse
                             foreach (string s in attackNames)
                             {
                                 Combatant targetCombatant = backupCombatants.First(x => x.ID == s);
-                                List<long> matchingAttacks = targetCombatant.Attacks.Where(a => a.ID == "2106601422").Select(a => a.Damage).ToList();
-                                List<long> jaPercents = targetCombatant.Attacks.Where(a => a.ID == "2106601422").Select(a => a.JA).ToList();
-                                List<long> criPercents = targetCombatant.Attacks.Where(a => a.ID == "2106601422").Select(a => a.Cri).ToList();
-                                attackData.Add(new Tuple<string, List<long>, List<long>, List<long>>(targetCombatant.Name, matchingAttacks, jaPercents, criPercents));
+                                List<int> matchingAttacks = targetCombatant.Attacks.Where(a => a.ID == "2106601422").Select(a => a.Damage).ToList();
+                                List<int> jaPercents = targetCombatant.Attacks.Where(a => a.ID == "2106601422").Select(a => a.JA).ToList();
+                                List<int> criPercents = targetCombatant.Attacks.Where(a => a.ID == "2106601422").Select(a => a.Cri).ToList();
+                                attackData.Add(new Tuple<string, List<int>, List<int>, List<int>>(targetCombatant.Name, matchingAttacks, jaPercents, criPercents));
                             }
                         }
 
@@ -297,10 +297,10 @@ namespace OverParse
                             foreach (string htf in finishNames)
                             {
                                 Combatant tCombatant = backupCombatants.First(x => x.ID == htf);
-                                List<long> fmatchingAttacks = tCombatant.Attacks.Where(a => Combatant.FinishAttackIDs.Contains(a.ID)).Select(a => a.Damage).ToList();
-                                List<long> jaPercents = tCombatant.Attacks.Where(a => Combatant.FinishAttackIDs.Contains(a.ID)).Select(a => a.JA).ToList();
-                                List<long> criPercents = tCombatant.Attacks.Where(a => Combatant.FinishAttackIDs.Contains(a.ID)).Select(a => a.Cri).ToList();
-                                attackData.Add(new Tuple<string, List<long>, List<long>, List<long>>(tCombatant.Name, fmatchingAttacks, jaPercents, criPercents));
+                                List<int> fmatchingAttacks = tCombatant.Attacks.Where(a => Combatant.FinishAttackIDs.Contains(a.ID)).Select(a => a.Damage).ToList();
+                                List<int> jaPercents = tCombatant.Attacks.Where(a => Combatant.FinishAttackIDs.Contains(a.ID)).Select(a => a.JA).ToList();
+                                List<int> criPercents = tCombatant.Attacks.Where(a => Combatant.FinishAttackIDs.Contains(a.ID)).Select(a => a.Cri).ToList();
+                                attackData.Add(new Tuple<string, List<int>, List<int>, List<int>>(tCombatant.Name, fmatchingAttacks, jaPercents, criPercents));
                             }
 
                         }
@@ -318,10 +318,10 @@ namespace OverParse
 
                             foreach (string s in attackNames)
                             {
-                                List<long> matchingAttacks = c.Attacks.Where(a => a.ID == s).Select(a => a.Damage).ToList();
-                                List<long> jaPercents = c.Attacks.Where(a => a.ID == s).Select(a => a.JA).ToList();
-                                List<long> criPercents = c.Attacks.Where(a => a.ID == s).Select(a => a.Cri).ToList();
-                                attackData.Add(new Tuple<string, List<long>, List<long>, List<long>>(s, matchingAttacks, jaPercents, criPercents));
+                                List<int> matchingAttacks = c.Attacks.Where(a => a.ID == s).Select(a => a.Damage).ToList();
+                                List<int> jaPercents = c.Attacks.Where(a => a.ID == s).Select(a => a.JA).ToList();
+                                List<int> criPercents = c.Attacks.Where(a => a.ID == s).Select(a => a.Cri).ToList();
+                                attackData.Add(new Tuple<string, List<int>, List<int>, List<int>>(s, matchingAttacks, jaPercents, criPercents));
                             }
                         }
 
@@ -408,16 +408,16 @@ namespace OverParse
                     if (str != "")
                     {
                         string[] parts = str.Split(',');
-                        long lineTimestamp = long.Parse(parts[0]);
-                        long instanceID = long.Parse(parts[1]);
+                        int lineTimestamp = int.Parse(parts[0]);
+                        int instanceID = int.Parse(parts[1]);
                         string sourceID = parts[2];
                         string sourceName = parts[3];
                         string targetID = parts[4];
                         string targetName = parts[5];
                         string attackID = parts[6];
-                        long hitDamage = long.Parse(parts[7]);
-                        long justAttack =long.Parse(parts[8]);
-                        long critical = long.Parse(parts[9]);
+                        int hitDamage = int.Parse(parts[7]);
+                        int justAttack =int.Parse(parts[8]);
+                        int critical = int.Parse(parts[9]);
 
                         int index = -1;
 
@@ -443,7 +443,7 @@ namespace OverParse
                             continue;
 
                         //Add different attacks if a new attack is found
-                        if (10000000 < long.Parse(sourceID))
+                        if (10000000 < int.Parse(sourceID))
                         {
                             foreach (Combatant x in combatants)
                             {
