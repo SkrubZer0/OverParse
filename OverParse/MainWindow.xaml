@@ -112,9 +112,9 @@
                 </MenuItem>
                 <MenuItem Style="{StaticResource topmenu}" Header="Parsing">
                     <MenuItem Style="{StaticResource submenu}" Header="Hide Enemy/NPCs" IsCheckable="True" IsChecked="True" x:Name="FilterPlayers" Click="FilterPlayers_Click"/>
-                    <MenuItem Style="{StaticResource submenu}" Header="Zanverse/HTF Options">
+                    <MenuItem Style="{StaticResource submenu}" Header="Zanverse/Finish Attack Options">
                         <MenuItem Style="{StaticResource submenu}" Header="Separate Zanverse" x:Name="SeparateZanverse" IsCheckable="True" IsChecked="False" Click="SeparateZanverse_Click"/>
-                        <MenuItem Style="{StaticResource submenu}" Header="Separate Hero Time Finish (HTF)" x:Name="SeparateFinish" IsCheckable="True" IsChecked="False" Click="SeparateFinish_Click"/>
+                        <MenuItem Style="{StaticResource submenu}" Header="Separate Finish Skills" x:Name="SeparateFinish" IsCheckable="True" IsChecked="False" Click="SeparateFinish_Click"/>
                     </MenuItem>
                     <MenuItem Style="{StaticResource submenu}" Header="Special Weapon Options">
                         <MenuItem Style="{StaticResource submenu}" Header="Separate AIS" x:Name="SeparateAIS" IsCheckable="True" IsChecked="False" Click="SeparateAIS_Click"/>

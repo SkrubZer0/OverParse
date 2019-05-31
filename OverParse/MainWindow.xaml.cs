@@ -508,7 +508,7 @@ namespace OverParse
             {
                 if (totalFinish > 0)
                 {
-                    Combatant finishHolder = new Combatant("99999995", "HTF Attacks", "HTF Attacks");
+                    Combatant finishHolder = new Combatant("99999995", "Finish Attacks", "Finish Attacks");
                     foreach (Combatant c in workingList)
                     {
                         if (c.IsAlly)

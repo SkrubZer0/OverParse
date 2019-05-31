@@ -25,7 +25,17 @@ namespace OverParse
                                                                   "11556353"    , // Hero Time Talis slashes
                                                                   "1233721870"  , // Hero Time Talis slashes while switched to Sword
                                                                   "1233722348"  , // Hero Time Talis slashes while switched to TMG
-                                                                  "3480338695"    // Hero Time TMG burst
+                                                                  "3480338695"  , // Hero Time TMG burst
+                                                                  "3695463316"  , // Phantom Time (Katana)
+                                                                  "975125104"   , // Phantom Time (Katana) final
+                                                                  "2243620231"  , // Phantom Time (Assault Rifle)
+                                                                  "1412080400"  , // Phantom Time (Assault Rifle) final
+                                                                  "2995855500"  , // Phantom Time (Rod)
+                                                                  "2682739872"  , // Phantom Time (Rod) 2nd part
+                                                                  "2682739887"  , // Phantom Time (Rod) 3rd part
+                                                                  "2682739886"  , // Phantom Time (Rod) final lasers
+                                                                  "156270665"   , // Katana Combat finish slash
+                                                                  "4259442013"    // Katana Combat finish AOE
                                                                   }; 
 
         public static string[] PhotonAttackIDs = new string[] {   "2414748436"  , // Facility Cannon
@@ -46,8 +56,16 @@ namespace OverParse
                                                                   "1460054769"  , // A.I.S cannon (Photon Blaster)
                                                                   "4081218683"  , // A.I.S mob freezing attack (Photon Blizzard)
                                                                   "3298256598"  , // A.I.S Weak Bullet
-                                                                  "2826401717"    // A.I.S Area Heal
-
+                                                                  "2826401717"  , // A.I.S Area Heal
+                                                                  "1164312683"  , // A.I.S. Vega Solid Vulcan
+                                                                  "858127000"   , // A.I.S. Vega Blade Rush first
+                                                                  "503978418"   , // A.I.S. Vega Blade Rush second
+                                                                  "3724116814"  , // A.I.S. Vega Blade Rush third
+                                                                  "2655531208"  , // A.I.S. Vega Step Attack
+                                                                  "383210274"   , // A.I.S. Vega Multi-Lock Missiles 
+                                                                  "2640906853"  , // A.I.S. Vega Counter Shield
+                                                                  "3968047485"  , // A.I.S. Vega Counter Shield big
+                                                                  "1628689645"    // A.I.S. Vega Photon Blaster
                                                                   }; 
 
         public static string[] RideAttackIDs = new string[] {     "3491866260"  , // Rideroid throw
@@ -175,7 +193,7 @@ namespace OverParse
         public bool IsRide => (isTemporary == "Ride");
         public bool IsZanverse => (isTemporary == "Zanverse");
         public bool IsPwp => (isTemporary == "Pwp");
-        public bool IsFinish => (isTemporary == "HTF Attacks");
+        public bool IsFinish => (isTemporary == "Finish Attacks");
         public bool IsDB => (isTemporary == "DB");
         public bool IsLsw => (isTemporary == "Lsw");
 
