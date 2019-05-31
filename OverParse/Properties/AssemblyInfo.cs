@@ -14,3 +14,5 @@ using System.Windows;
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
+[assembly: AssemblyVersion("3.2.4.0")]
+[assembly: AssemblyFileVersion("3.2.4.0")]
