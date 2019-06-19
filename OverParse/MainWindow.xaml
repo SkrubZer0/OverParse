@@ -26,7 +26,6 @@
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderThickness" Value="0,0,0,0" />
-            <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick" />
             <Style.Triggers>
                 <Trigger Property="ItemsControl.AlternationIndex" Value="0">
                     <Setter Property="Background" Value="{Binding Brush}"/>
