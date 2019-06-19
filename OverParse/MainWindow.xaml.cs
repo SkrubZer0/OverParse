@@ -697,13 +697,5 @@ namespace OverParse
                 DragMove();
             }
         }
-
-        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var data = (ListViewItem)sender;
-            var item = CombatantData.ContainerFromElement((DependencyObject)e.OriginalSource) as ListViewItem;
-            Details f = new Details(data.ToString(), "value") { Owner = this };
-            f.Show();
-        }
     }
 }
