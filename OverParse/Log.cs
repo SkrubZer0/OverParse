@@ -329,23 +329,20 @@ namespace OverParse
 
                         foreach (var i in attackData)
                         {
-                            if (i.Item1 != "Damage Taken" || i.Item1 != "Variating Redress" || i.Item1 != "Maron/Melon Strike (damage to pet)")
-                            {
-                                double percent = i.Item2.Sum() * 100d / c.ReadDamage;
-                                string spacer = (percent >= 9) ? "" : " ";
+                            double percent = i.Item2.Sum() * 100d / c.ReadDamage;
+                            string spacer = (percent >= 9) ? "" : " ";
 
-                                string paddedPercent = percent.ToString("00.00");
-                                string hits = i.Item2.Count().ToString("N0");
-                                string sum = i.Item2.Sum().ToString("N0");
-                                string min = i.Item2.Min().ToString("N0");
-                                string max = i.Item2.Max().ToString("N0");
-                                string avg = i.Item2.Average().ToString("N0");
-                                string ja = (i.Item3.Average() * 100).ToString("N2") ?? "null";
-                                string cri = (i.Item4.Average() * 100).ToString("N2") ?? "null";
-                                log += $"{paddedPercent}%	| {i.Item1} ({sum}) Damage";
-                                log += $" - JA : {ja}% - Critical : {cri}%" + Environment.NewLine;
-                                log += $"      	|   {hits} hits - {min} min, {avg} avg, {max} max" + Environment.NewLine;
-                            }
+                            string paddedPercent = percent.ToString("00.00");
+                            string hits = i.Item2.Count().ToString("N0");
+                            string sum = i.Item2.Sum().ToString("N0");
+                            string min = i.Item2.Min().ToString("N0");
+                            string max = i.Item2.Max().ToString("N0");
+                            string avg = i.Item2.Average().ToString("N0");
+                            string ja = (i.Item3.Average() * 100).ToString("N2") ?? "null";
+                            string cri = (i.Item4.Average() * 100).ToString("N2") ?? "null";
+                            log += $"{paddedPercent}%	| {i.Item1} ({sum}) Damage";
+                            log += $" - JA : {ja}% - Critical : {cri}%" + Environment.NewLine;
+                            log += $"      	|   {hits} hits - {min} min, {avg} avg, {max} max" + Environment.NewLine;
                         }
 
                         log += Environment.NewLine;
