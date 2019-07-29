@@ -329,7 +329,7 @@ namespace OverParse
 
                         foreach (var i in attackData)
                         {
-                            if (i.Item1 != "Damage Taken")
+                            if (i.Item1 != "Damage Taken" || i.Item1 != "Variating Redress" || i.Item1 != "Maron/Melon Strike (damage to pet)")
                             {
                                 double percent = i.Item2.Sum() * 100d / c.ReadDamage;
                                 string spacer = (percent >= 9) ? "" : " ";
@@ -345,11 +345,6 @@ namespace OverParse
                                 log += $"{paddedPercent}%	| {i.Item1} ({sum}) Damage";
                                 log += $" - JA : {ja}% - Critical : {cri}%" + Environment.NewLine;
                                 log += $"      	|   {hits} hits - {min} min, {avg} avg, {max} max" + Environment.NewLine;
-                            }
-                            else
-                            {
-                                string hits = i.Item2.Count().ToString("N0");
-                                log += "Number of hits taken: " + hits + Environment.NewLine;
                             }
                         }
 
