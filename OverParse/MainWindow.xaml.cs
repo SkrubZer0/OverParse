@@ -377,7 +377,7 @@ namespace OverParse
                 Combatant temp = new Combatant(c.ID, c.Name, c.isTemporary);
                 foreach (Attack a in c.Attacks)
                 {
-                    if(a.ID == "3714671926" || a.ID == "3460765776")
+                    if(a.ID == "3714671926" || a.ID == "3460765776" || a.ID == "2845781174")
                     {
                         temp.Attacks.Remove(a);
                     }
