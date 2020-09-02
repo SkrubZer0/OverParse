@@ -111,11 +111,10 @@
                 </MenuItem>
                 <MenuItem Style="{StaticResource topmenu}" Header="Parsing">
                     <MenuItem Style="{StaticResource submenu}" Header="Hide Enemy/NPCs" IsCheckable="True" IsChecked="True" x:Name="FilterPlayers" Click="FilterPlayers_Click"/>
-                    <MenuItem Style="{StaticResource submenu}" Header="Zanverse/Finish Attack Options">
+                    <MenuItem Style="{StaticResource submenu}" Header="Damage Separation Options">
                         <MenuItem Style="{StaticResource submenu}" Header="Separate Zanverse" x:Name="SeparateZanverse" IsCheckable="True" IsChecked="False" Click="SeparateZanverse_Click"/>
                         <MenuItem Style="{StaticResource submenu}" Header="Separate Finish Skills" x:Name="SeparateFinish" IsCheckable="True" IsChecked="False" Click="SeparateFinish_Click"/>
-                    </MenuItem>
-                    <MenuItem Style="{StaticResource submenu}" Header="Special Weapon Options">
+                        <MenuItem Style="{StaticResource submenu}" Header="Separate Status Damage" x:Name="SeparateStatus" IsCheckable="True" IsChecked="False" Click="SeparateStatus_Click"/>
                         <MenuItem Style="{StaticResource submenu}" Header="Separate AIS" x:Name="SeparateAIS" IsCheckable="True" IsChecked="False" Click="SeparateAIS_Click"/>
                         <MenuItem Style="{StaticResource submenu}" Header="Separate Dark Blast" x:Name="SeparateDB" IsCheckable="True" IsChecked="False" Click="SeparateDB_Click"/>
                         <MenuItem Style="{StaticResource submenu}" Header="Separate Rideroid" x:Name="SeparateRide" IsCheckable="True" IsChecked="False" Click="SeparateRide_Click" />

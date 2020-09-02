@@ -442,7 +442,21 @@ namespace OverParse.Properties {
                 this["SeparateFinish"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SeparateStatus {
+            get
+            {
+                return ((bool)(this["SeparateStatus"]));
+            }
+            set
+            {
+                this["SeparateStatus"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]

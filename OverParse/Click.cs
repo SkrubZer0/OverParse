@@ -135,6 +135,12 @@ namespace OverParse
             UpdateForm(null, null);
         }
 
+        private void SeparateStatus_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.SeparateStatus = SeparateStatus.IsChecked;
+            UpdateForm(null, null);
+        }
+
         private void SeparateAIS_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.SeparateAIS = SeparateAIS.IsChecked;

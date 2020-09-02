@@ -17,7 +17,19 @@ namespace OverParse
         public float PercentDPS, PercentReadDPS;
         
         public List<Attack> Attacks;
-        
+
+        public static string[] StatusEffectIDs = new string[] {   "2505928570"  , //Burn level 1
+                                                                  "2505928505"  , //Burn level 2
+                                                                  "2505928696"  , //Burn level 3
+                                                                  "2505928584"  , //Burn level 4
+                                                                  "2505927753"  , //Burn level 5
+                                                                  "1739789695"  , //Poison level 1
+                                                                  "1739789694"  , //Poison level 2
+                                                                  "1739789665"  , //Poison level 3
+                                                                  "1739789664"  , //Poison level 4
+                                                                  "1739789667"  , //Poison level 5
+                                                                  };
+
         public static string[] FinishAttackIDs = new string[] {   "2268332858"  , // Hero Time Sword slashes
                                                                   "170999070"   , // Hero Time Sword finish
                                                                   "2268332813"  , // Hero Time Sword finish hard hit
@@ -181,6 +193,7 @@ namespace OverParse
 
         public long GetZanverseDamage => Attacks.Where(a => a.ID == "2106601422").Sum(x => x.Damage);
         public long GetFinishDamage => Attacks.Where(a => FinishAttackIDs.Contains(a.ID)).Sum(x => x.Damage);
+        public long GetStatusDamage => Attacks.Where(a => StatusEffectIDs.Contains(a.ID)).Sum(x => x.Damage);
 
         public string JAPercent => GetJAPercent();
         public string CRIPercent => GetCRIPercent();
@@ -194,6 +207,7 @@ namespace OverParse
         public bool IsZanverse => (isTemporary == "Zanverse");
         public bool IsPwp => (isTemporary == "Pwp");
         public bool IsFinish => (isTemporary == "Finish Attacks");
+        public bool IsStatus => (isTemporary == "Status Damage");
         public bool IsDB => (isTemporary == "DB");
         public bool IsLsw => (isTemporary == "Lsw");
 
@@ -383,7 +397,7 @@ namespace OverParse
 
         private long GetMPADamage()
         {
-            if (IsZanverse || IsFinish || IsAIS || IsPwp || IsDB || IsRide)
+            if (IsZanverse || IsFinish || IsStatus || IsAIS || IsPwp || IsDB || IsRide)
                 return Damage;
 
             long temp = Damage;
@@ -391,6 +405,8 @@ namespace OverParse
                 temp -= GetZanverseDamage;
             if (Properties.Settings.Default.SeparateFinish)
                 temp -= GetFinishDamage;
+            if (Properties.Settings.Default.SeparateStatus)
+                temp -= GetStatusDamage;
             if (Properties.Settings.Default.SeparatePwp)
                 temp -= PwpDamage;
             if (Properties.Settings.Default.SeparateAIS)

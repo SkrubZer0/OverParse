@@ -512,6 +512,7 @@ namespace OverParse
             // make dummy zanverse combatant if necessary
             long totalZanverse = workingList.Where(c => c.IsAlly == true).Sum(x => x.GetZanverseDamage);
             long totalFinish = workingList.Where(c => c.IsAlly == true).Sum(x => x.GetFinishDamage);
+            long totalStatus = workingList.Where(c => c.IsAlly == true).Sum(x => x.GetStatusDamage);
 
             if (Properties.Settings.Default.SeparateFinish)
             {
@@ -529,6 +530,25 @@ namespace OverParse
                     }
                     finishHolder.ActiveTime = elapsed;
                     workingList.Add(finishHolder);
+                }
+            }
+
+            if (Properties.Settings.Default.SeparateStatus)
+            {
+                if (totalStatus > 0)
+                {
+                    Combatant statusHolder = new Combatant("99999996", "Status Damage", "Status Damage");
+                    foreach (Combatant c in workingList)
+                    {
+                        if (c.IsAlly)
+                        {
+                            List<Attack> targetAttacks = c.Attacks.Where(a => Combatant.StatusEffectIDs.Contains(a.ID)).ToList();
+                            statusHolder.Attacks.AddRange(targetAttacks);
+                            c.Attacks = c.Attacks.Except(targetAttacks).ToList();
+                        }
+                    }
+                    statusHolder.ActiveTime = elapsed;
+                    workingList.Add(statusHolder);
                 }
             }
 
@@ -588,10 +608,12 @@ namespace OverParse
                         filtered = false;
                     if (c.IsFinish)
                         filtered = false;
+                    if (c.IsStatus)
+                        filtered = false;
                 }
                 else
                 {
-                    if ((c.IsAlly || c.IsZanverse || c.IsFinish || !FilterPlayers.IsChecked) && (c.Damage > 0))
+                    if ((c.IsAlly || c.IsZanverse || c.IsFinish || c.IsStatus || !FilterPlayers.IsChecked) && (c.Damage > 0))
                         filtered = false;
                 }
 
